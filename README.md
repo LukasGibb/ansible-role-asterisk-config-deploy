@@ -32,10 +32,10 @@ Obviously you will need to pass in pass in your git repository details (not the 
 
     - hosts: pabxservers
       vars: 
-        asterisk-config-deploy-repo-protocol: "https://" 
-        asterisk-config-deploy-repo-url: "github.com/myusername/myasteriskconfig"
-        asterisk-config-deploy-repo-username: "myusername"
-        asterisk-config-deploy-repo-password: "SuperSecretPassword"
+        asterisk_config_deploy_repo_protocol: "https://" 
+        asterisk_config_deploy_repo_url: "github.com/myusername/myasteriskconfig"
+        asterisk_config_deploy_repo_username: "myusername"
+        asterisk_config_deploy_repo_password: "SuperSecretPassword"
       
       roles:
         - LukasGibb.asterisk

@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars:  
-    asterisk-config-deploy-repo-url: "github.com/LukasGibb/test-asterisk-config"
+    asterisk_config_deploy_repo_url: "github.com/LukasGibb/test-asterisk-config"
 
   roles:
     - LukasGibb.asterisk

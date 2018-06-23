@@ -3,8 +3,8 @@
 
 - name: asterisk symlink config files
   file:
-    src: "{{ asterisk-config-deploy-repo-directory }}{{ item }}"
-    dest: "{{ asterik-config-deploy-asterisk-directory }}{{ item }}"
+    src: "{{ asterisk_config_deploy_repo_directory }}{{ item }}"
+    dest: "{{ asterisk_config_deploy_asterisk_directory }}{{ item }}"
     state: link
     force: yes
   with_items:
