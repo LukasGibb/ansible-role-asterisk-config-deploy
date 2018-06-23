@@ -5,11 +5,15 @@
 # "https://", "ssh://" etc
 asterisk-config-deploy-repo-protocol: "https://" 
 # Do not include the protocol in the URL ie 'https://'
-asterisk-config-deploy-repo-url: "github.com/LukasGibb/myasteriskconfig"
-asterisk-config-deploy-repo-username: "LukasGibb"
-asterisk-config-deploy-repo-password: "SuperSecretPassword"
+asterisk-config-deploy-repo-url: "github.com/myusername/myasteriskconfig"
+#asterisk-config-deploy-repo-auth: false
+#asterisk-config-deploy-repo-username: "myusername"
+#asterisk-config-deploy-repo-password: "SuperSecretPassword"
 
-asterisk-config-deploy-repo: "{{ asterisk-config-deploy-repo-protocol }}{{ asterisk-config-deploy-repo-username | urlencode }}:{{ asterisk-config-deploy-repo-password | urlencode }}@{{ asterisk-config-deploy-repo-url }}"
+#asterisk-config-deploy-repo: "{{ asterisk-config-deploy-repo-protocol }}{{ asterisk-config-deploy-repo-username | urlencode }}:{{ asterisk-config-deploy-repo-password | urlencode }}@{{ asterisk-config-deploy-repo-url }}"
+
+asterisk-config-deploy-repo: "{{ asterisk-config-deploy-repo-protocol }}{{ asterisk-config-deploy-repo-url }}"
+
 
 # The directory where the git files will be checked out to
 asterisk-config-deploy-repo-directory: "/etc/asterisk-config-deploy/"
