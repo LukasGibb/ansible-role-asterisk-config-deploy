@@ -1,0 +1,10 @@
+---
+# tasks file for ansible-role-asterisk-config-deploy
+
+ - name: Create directory for asterisk config files
+   file: path={{ asterisk-config-deploy-repo-directory }} state=directory mode=755
+
+ - name: Git checkout from github
+   git: repo={{ asterisk-config-deploy-repo }}
+        dest={{ asterisk-config-deploy-repo-directory }}
+   notify: asterisk symlink config files

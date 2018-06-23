@@ -1,0 +1,6 @@
+---
+- hosts: all
+
+  roles:
+    - LukasGibb.asterisk
+    - role_under_test

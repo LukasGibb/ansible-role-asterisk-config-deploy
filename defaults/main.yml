@@ -1,0 +1,17 @@
+---
+# defaults file for ansible-role-asterisk-config-deploy
+
+# These variables must be passed and are used to build the URL to your repository
+# "https://", "ssh://" etc
+asterisk-config-deploy-repo-protocol: "https://" 
+# Do not include the protocol in the URL ie 'https://'
+asterisk-config-deploy-repo-url: "github.com/LukasGibb/myasteriskconfig"
+asterisk-config-deploy-repo-username: "LukasGibb"
+asterisk-config-deploy-repo-password: "SuperSecretPassword"
+
+asterisk-config-deploy-repo: "{{ asterisk-config-deploy-repo-protocol }}{{ asterisk-config-deploy-repo-username | urlencode }}:{{ asterisk-config-deploy-repo-password | urlencode }}@{{ asterisk-config-deploy-repo-url }}"
+
+# The directory where the git files will be checked out to
+asterisk-config-deploy-repo-directory: "/etc/asterisk-config-deploy/"
+# The directory asterisk looks in for it's config files
+asterisk-config-deploy-asterisk-directory: "/etc/asterisk/"
