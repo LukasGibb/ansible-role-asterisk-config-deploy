@@ -9,11 +9,11 @@
 
 - name: asterisk symlink repo config files
   file:
-    src: "{{ asterisk_config_deploy_repo_directory }}{{ asterisk_config_deploy_repo_subfolder }}{{ item | basename }}"
-    dest: "{{ asterisk_config_deploy_asterisk_directory }}{{ item }}"
+    src: "{{ asterisk_config_deploy_repo_directory }}{{ asterisk_config_deploy_repo_subfolder }}{{ item.path | basename }}"
+    dest: "{{ asterisk_config_deploy_asterisk_directory }}{{ item.path | basename }}"
     state: link
     force: yes
-  with_items: "{{ find.results.files }}"
+  with_items: "{{ find.files }}"
   notify: asterisk reload
   
 - name: asterisk reload
