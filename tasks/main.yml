@@ -1,10 +1,15 @@
 ---
 # tasks file for ansible-role-asterisk-config-deploy
 
- - name: Create directory for asterisk config files
-   file: path={{ asterisk_config_deploy_repo_directory }} state=directory mode=755
+- name: Install requirements via apt
+  apt: name={{item}} state=present
+  with_items:
+  - git
 
- - name: Git checkout from github
-   git: repo={{ asterisk_config_deploy_repo }}
-        dest={{ asterisk_config_deploy_repo_directory }}
-   notify: asterisk symlink config files
+- name: Create directory for asterisk config files
+  file: path={{ asterisk_config_deploy_repo_directory }} state=directory mode=755
+
+- name: Git checkout from github
+  git: repo={{ asterisk_config_deploy_repo }}
+       dest={{ asterisk_config_deploy_repo_directory }}
+  notify: asterisk symlink config files
