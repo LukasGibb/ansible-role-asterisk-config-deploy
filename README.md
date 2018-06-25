@@ -36,6 +36,7 @@ Obviously you will need to pass in pass in your git repository details (not the 
         asterisk_config_deploy_repo_url: "github.com/myusername/myasteriskconfig"
         asterisk_config_deploy_repo_username: "myusername"
         asterisk_config_deploy_repo_password: "SuperSecretPassword"
+        asterisk_config_deploy_repo_subfolder: "asterisk-config"
       
       roles:
         - LukasGibb.asterisk

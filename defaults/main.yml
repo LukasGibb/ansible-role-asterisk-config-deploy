@@ -17,5 +17,9 @@ asterisk_config_deploy_repo: "{{ asterisk_config_deploy_repo_protocol }}{{ aster
 
 # The directory where the git files will be checked out to
 asterisk_config_deploy_repo_directory: "/etc/asterisk-config-deploy/"
+
+# If the asterisk config files are in a subfolder in the repo, specify it here
+asterisk_config_deploy_repo_subfolder: ""
+
 # The directory asterisk looks in for it's config files
 asterisk_config_deploy_asterisk_directory: "/etc/asterisk/"

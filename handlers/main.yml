@@ -1,15 +1,20 @@
 ---
 # handlers file for ansible-role-asterisk-config-deploy
 
+- name: asterisk update config files
+  find:     
+    paths: "{{ asterisk_config_deploy_repo_directory }}{{ asterisk_config_deploy_repo_subfolder }}"
+    patterns: "*.conf,*.ael,*.adsi,*.lua"
+  register: find
+  notify: asterisk symlink config files
+
 - name: asterisk symlink config files
   file:
-    src: "{{ asterisk_config_deploy_repo_directory }}{{ item }}"
+    src: "{{ asterisk_config_deploy_repo_directory }}{{ asterisk_config_deploy_repo_subfolder }}{{ item | basename }}"
     dest: "{{ asterisk_config_deploy_asterisk_directory }}{{ item }}"
     state: link
     force: yes
-  with_items:
-    - extensions.conf
-    - voicemail.conf
+  with_items: "{{ find.results.files }}"
   notify: asterisk reload
   
 - name: asterisk reload
