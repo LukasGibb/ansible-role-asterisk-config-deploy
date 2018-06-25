@@ -12,4 +12,6 @@
 - name: Git checkout from github
   git: repo={{ asterisk_config_deploy_repo }}
        dest={{ asterisk_config_deploy_repo_directory }}
-  notify: asterisk update config files
+  notify: 
+  - asterisk find repo config files
+  - asterisk symlink repo config files

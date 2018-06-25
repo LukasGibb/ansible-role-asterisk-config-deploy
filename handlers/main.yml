@@ -1,14 +1,13 @@
 ---
 # handlers file for ansible-role-asterisk-config-deploy
 
-- name: asterisk update config files
-  find:     
+- name: asterisk find repo config files
+  find:
     paths: "{{ asterisk_config_deploy_repo_directory }}{{ asterisk_config_deploy_repo_subfolder }}"
     patterns: "*.conf,*.ael,*.adsi,*.lua"
   register: find
-  notify: asterisk symlink config files
 
-- name: asterisk symlink config files
+- name: asterisk symlink repo config files
   file:
     src: "{{ asterisk_config_deploy_repo_directory }}{{ asterisk_config_deploy_repo_subfolder }}{{ item | basename }}"
     dest: "{{ asterisk_config_deploy_asterisk_directory }}{{ item }}"
