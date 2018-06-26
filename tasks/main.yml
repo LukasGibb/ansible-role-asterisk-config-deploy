@@ -9,9 +9,11 @@
 - name: Create directory for asterisk config files
   file: path={{ asterisk_config_deploy_repo_directory }} state=directory mode=755
 
-- name: Git checkout from github
+- name: Git checkout from git repo
   git: repo={{ asterisk_config_deploy_repo }}
        dest={{ asterisk_config_deploy_repo_directory }}
   notify: 
-  - asterisk find repo config files
-  - asterisk symlink repo config files
+  - asterisk find repo subfolder files
+  - asterisk symlink repo subfolder files
+  - asterisk find repo override files
+  - asterisk symlink repo override files

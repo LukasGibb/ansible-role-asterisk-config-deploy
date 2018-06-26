@@ -19,7 +19,13 @@ asterisk_config_deploy_repo: "{{ asterisk_config_deploy_repo_protocol }}{{ aster
 asterisk_config_deploy_repo_directory: "/etc/asterisk-config-deploy/"
 
 # If the asterisk config files are in a subfolder in the repo, specify it here
+# eg. "asterisk-config/"
 asterisk_config_deploy_repo_subfolder: ""
+
+# If there are config files specific to a particular server, provide the path here.
+# These files will be symlinked after the asterisk_config_deploy_repo_subfolder files.
+# eg. a US based PABX may have "asterisk-config/us/" and the UK PABX would have "asterisk-config/uk/"
+asterisk_config_deploy_repo_override_subfolder: ""
 
 # The directory asterisk looks in for it's config files
 asterisk_config_deploy_asterisk_directory: "/etc/asterisk/"
