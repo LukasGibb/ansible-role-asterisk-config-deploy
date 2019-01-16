@@ -10,7 +10,7 @@
 - name: asterisk symlink repo base files
   file:
     src: "{{ asterisk_config_deploy_base_path }}{{ item.path | basename }}"
-    dest: "{{ asterisk_config_deploy_asterisk_directory }}{{ item.path | basename }}"
+    dest: "{{ asterisk_config_deploy_asterisk_path }}{{ item.path | basename }}"
     state: link
     force: yes
   with_items: "{{ find_base.files }}"
@@ -25,7 +25,7 @@
 - name: asterisk symlink repo override files
   file:
     src: "{{ asterisk_config_deploy_or_path }}{{ item.path | basename }}"
-    dest: "{{ asterisk_config_deploy_asterisk_directory }}{{ item.path | basename }}"
+    dest: "{{ asterisk_config_deploy_asterisk_path }}{{ item.path | basename }}"
     state: link
     force: yes
   with_items: "{{ find_override.files }}"
