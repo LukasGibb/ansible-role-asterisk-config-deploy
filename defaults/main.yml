@@ -3,14 +3,9 @@
 
 # These variables must be passed and are used to build the URL to your repository
 # "https://", "ssh://" etc
-asterisk_config_deploy_repo_protocol: "https://" 
+asterisk_config_deploy_repo_protocol: "ssh://" 
 # Do not include the protocol in the URL ie 'https://'
 asterisk_config_deploy_repo_url: "github.com/myusername/myasteriskconfig"
-#asterisk_config_deploy_repo_auth: false
-#asterisk_config_deploy_repo_username: "myusername"
-#asterisk_config_deploy_repo_password: "SuperSecretPassword"
-
-#asterisk_config_deploy_repo: "{{ asterisk_config_deploy_repo_protocol }}{{ asterisk_config_deploy_repo_username | urlencode }}:{{ asterisk_config_deploy_repo_password | urlencode }}@{{ asterisk_config_deploy_repo_url }}"
 
 asterisk_config_deploy_repo: "{{ asterisk_config_deploy_repo_protocol }}{{ asterisk_config_deploy_repo_url }}"
 

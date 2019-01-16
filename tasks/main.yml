@@ -6,12 +6,15 @@
   with_items:
   - git
 
+# Permissions set to 777 so that they can be accessed by the user running git
 - name: Create directory for asterisk config files
-  file: path={{ asterisk_config_deploy_repo_directory }} state=directory mode=755
+  file: path={{ asterisk_config_deploy_repo_directory }} state=directory mode=777
 
+# This task runs 'become: no' so that the users SSH keys can be used to connect to the git repo
 - name: Git checkout from git repo
   git: repo={{ asterisk_config_deploy_repo }}
        dest={{ asterisk_config_deploy_repo_directory }}
+  become: no
   notify: 
   - asterisk find repo subfolder files
   - asterisk symlink repo subfolder files

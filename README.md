@@ -11,7 +11,11 @@ WARNING: This will delete your original asterisk config files! Do not run on an 
 Requirements
 ------------
 
-Requires a working asterisk installation and a (private) git repository that contains your config files.
+Requires a working asterisk installation and a git repository that contains your config files.
+
+If your config repository is private (recommended) then look at setting up ssh-agent forwarding so that the git task can utilise your SSH keys without you having to leave your SSH keys on the asterisk server:
+
+https://developer.github.com/v3/guides/using-ssh-agent-forwarding/
 
 Role Variables
 --------------
@@ -34,8 +38,6 @@ Obviously you will need to pass in pass in your git repository details (not the 
       vars: 
         asterisk_config_deploy_repo_protocol: "https://" 
         asterisk_config_deploy_repo_url: "github.com/myusername/myasteriskconfig"
-        asterisk_config_deploy_repo_username: "myusername"
-        asterisk_config_deploy_repo_password: "SuperSecretPassword"
         asterisk_config_deploy_repo_subfolder: "asterisk-config"
       
       roles:
