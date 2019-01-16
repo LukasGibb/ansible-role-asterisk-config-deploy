@@ -3,17 +3,18 @@
 
 - name: Install requirements via apt
   apt:
-    name: "{{ item }}"
+    name: "{{ packages }}"
     state: present
-  with_items:
-  - git
+  vars:
+    packages:
+    - git
   register: my_result
   until: my_result is succeeded
 
 # Permissions set to 0777 so that they can be accessed by the user running git
 - name: Create directory for asterisk config files
   file:
-    path: "{{ asterisk_config_deploy_repo_directory }}"
+    path: "{{ asterisk_config_deploy_path }}"
     state: directory
     mode: 0777
 
@@ -21,7 +22,7 @@
 - name: Git checkout from git repo
   git:
     repo: "{{ asterisk_config_deploy_repo }}"
-    dest: "{{ asterisk_config_deploy_repo_directory }}"
+    dest: "{{ asterisk_config_deploy_path }}"
     version: master
   become: no
   notify: 
