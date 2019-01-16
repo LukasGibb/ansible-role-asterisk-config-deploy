@@ -7,15 +7,14 @@ asterisk_config_deploy_repo_protocol: "ssh://"
 # Do not include the protocol in the URL ie 'https://'
 asterisk_config_deploy_repo_url: "github.com/myusername/myasteriskconfig"
 
-asterisk_config_deploy_repo: "{{ asterisk_config_deploy_repo_protocol }}{{ asterisk_config_deploy_repo_url }}"
-
 
 # The directory where the git files will be checked out to
-asterisk_config_deploy_repo_directory: "/etc/asterisk-config-deploy/"
+asterisk_config_deploy_path: "/etc/asterisk-config-deploy/"
 
 # If the asterisk config files are in a subfolder in the repo, specify it here
 # eg. "asterisk-config/"
 asterisk_config_deploy_repo_subfolder: ""
+
 
 # If there are config files specific to a particular server, provide the path here.
 # These files will be symlinked after the asterisk_config_deploy_repo_subfolder files.
@@ -23,4 +22,9 @@ asterisk_config_deploy_repo_subfolder: ""
 asterisk_config_deploy_repo_override_subfolder: ""
 
 # The directory asterisk looks in for it's config files
-asterisk_config_deploy_asterisk_directory: "/etc/asterisk/"
+asterisk_config_deploy_asterisk_path: "/etc/asterisk/"
+
+# Concatenate variables to shorten them and make other code more readable (keeping under 120 chars per line)
+asterisk_config_deploy_repo: "{{ asterisk_config_deploy_repo_protocol }}{{ asterisk_config_deploy_repo_url }}"
+asterisk_config_deploy_base_path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_repo_subfolder }}"
+asterisk_config_deploy_or_path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_repo_override_subfolder }}"
