@@ -26,7 +26,7 @@
     version: master
   become: no
   notify: 
-  - asterisk find repo subfolder files
-  - asterisk symlink repo subfolder files
+  - asterisk find repo base files
+  - asterisk symlink repo base files
   - asterisk find repo override files
   - asterisk symlink repo override files
