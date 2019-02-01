@@ -10,6 +10,7 @@
     - git
   register: my_result
   until: my_result is succeeded
+  tags: asterisk-config-deploy
 
 # Permissions set to 0777 so that they can be accessed by the user running git
 - name: Create directory for asterisk config files
@@ -17,6 +18,7 @@
     path: "{{ asterisk_config_deploy_path }}"
     state: directory
     mode: 0777
+  tags: asterisk-config-deploy
 
 # This task runs 'become: no' so that the users SSH keys can be used to connect to the git repo
 - name: Git checkout from git repo
@@ -31,3 +33,4 @@
   - asterisk find repo override files
   - asterisk symlink repo override files
   - asterisk reload
+  tags: asterisk-config-deploy
