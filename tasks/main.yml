@@ -8,6 +8,7 @@
   vars:
     packages:
     - git
+    - git-lfs
   register: my_result
   until: my_result is succeeded
   tags: asterisk-config-deploy
