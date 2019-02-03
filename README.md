@@ -1,25 +1,45 @@
 asterisk-config-deploy
 =========
 
-An Ansible role that deploys Asterisk config files/dialplan from a git repository
+An Ansible role that deploys Asterisk config, sounds and moh files from a git repository
 
 The role will checkout configuration files from a git repository into a working
 directory and then symlink these files into the asterisk config directory.
 
 WARNING: This will delete your original asterisk config files! Do not run on an existing server.
 
-File Override System
+The role will also symlink directories containing custom 'sounds' and 'moh' files.
+
+To use this option you should look into using Git LFS for storing the sound files. The role will install 
+git-lfs on the server for you.
+
+Asterisk Config File Override System
 ---------------
 
 Config files specific to a particular server can be placed into a subfolder in the repository.
 This can help when you have a generic dialplan but need to configure extensions/trunks etc for multiple 
 regions/offices/customers.
 
-eg. Config files for the US PABX in "asterisk-config/us/" and the UK PABX in "asterisk-config/uk/"
+eg. Config files for the US PABX in "asterisk/us/" and the UK PABX in "asterisk/uk/"
 
-The path to the relevant subfolder can be set in a host variable (asterisk_config_deploy_repo_override_subfolder).
+The path to the relevant subfolder can be set in a host variable (asterisk_config_deploy_ast_override_dir).
 The role will deploy any server specific config files that are present instead of the more 'generic' files of the 
 same name in the main folder.
+
+Asterisk Sounds
+---------------
+
+Custom asterisk sound files can be added to a directory in the repo (default dir: sounds). This directory will be
+symlinked to the 'custom' asterisk 'sounds' directory.
+
+
+Asterisk Music On Hold
+---------------
+
+Custom asterisk 'music on hold' files can be added to a directory in the repo (default dir: moh). This directory will 
+be symlinked to a 'custom' directory under the asterisk 'moh' directory (so we don't lose the original moh files). If
+you would prefer to overwrite the default moh files instead, set 'asterisk_config_deploy_moh_path' to the actual moh 
+path.
 
 Requirements
 ------------

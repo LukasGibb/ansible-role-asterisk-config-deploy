@@ -1,30 +1,57 @@
 ---
 # defaults file for ansible-role-asterisk-config-deploy
 
+###############################################################################
+# Git Repo Details
+###############################################################################
+
 # These variables must be passed and are used to build the URL to your repository
 # "https://", "ssh://" etc
 asterisk_config_deploy_repo_protocol: "ssh://" 
 # Do not include the protocol in the URL ie 'https://'
 asterisk_config_deploy_repo_url: "github.com/myusername/myasteriskconfig"
-
-
 # The directory where the git files will be checked out to
 asterisk_config_deploy_path: "/etc/asterisk-config-deploy/"
 
-# If the asterisk config files are in a subfolder in the repo, specify it here
-# eg. "asterisk-config/"
-asterisk_config_deploy_repo_subfolder: ""
+###############################################################################
+# Asterisk Config Details
+###############################################################################
 
+# The repo directory that contains your base asterisk config files
+asterisk_config_deploy_ast_dir: "asterisk"
 
-# If there are config files specific to a particular server, provide the path here.
-# These files will be symlinked after the asterisk_config_deploy_repo_subfolder files.
-# eg. a US based PABX may have "asterisk-config/us/" and the UK PABX would have "asterisk-config/uk/"
-asterisk_config_deploy_repo_override_subfolder: ""
+# The repo directory that contains more specific asterisk config files
+# These files will be symlinked after the files in 'asterisk_config_deploy_ast_dir'
+# overriding them.
+# eg. a US based PABX may have "asterisk/us/" and the UK PABX would have "asterisk/uk/"
+# You may also like to use the hostname for the override folder
+# eg. "asterisk/pbx01.yourdomain.com/"
+asterisk_config_deploy_ast_override_dir: ""
 
-# The directory asterisk looks in for it's config files
+# The path that asterisk looks in for it's config files
+# This is the directory that the files from your repo will be symlinked to
+# Warning: the original files in this folder will be deleted when symlinks are added.
 asterisk_config_deploy_asterisk_path: "/etc/asterisk/"
 
-# Concatenate variables to shorten them and make other code more readable (keeping under 120 chars per line)
-asterisk_config_deploy_repo: "{{ asterisk_config_deploy_repo_protocol }}{{ asterisk_config_deploy_repo_url }}"
-asterisk_config_deploy_base_path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_repo_subfolder }}"
-asterisk_config_deploy_or_path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_repo_override_subfolder }}"
+###############################################################################
+# Asterisk Sounds Directory Details
+###############################################################################
+
+# The repo directory that contains your custom asterisk sound files
+asterisk_config_deploy_sounds_dir: "sounds"
+# The path that asterisk looks in for 'custom' sound files
+asterisk_config_deploy_sounds_path: "/usr/local/share/asterisk/sounds"
+
+###############################################################################
+# Asterisk Music On Hold Directory Details
+###############################################################################
+
+# The repo directory that contains your custom asterisk music on hold files
+asterisk_config_deploy_moh_dir: "moh"
+# The path taht asterisk expects to find music on hold files
+asterisk_config_deploy_moh_path: "/usr/share/asterisk/moh/custom"
+
+# NB: By default symlink to a 'custom' subdirectory so we don't overwrite
+# the default music on hold files. You can either set the variable to the main
+# directory (one level up) or just reference the 'moh/custom' folder in your
+# asterisk moh config file/s to pick up the correct directory/files.

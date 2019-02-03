@@ -21,6 +21,15 @@
     mode: 0777
   tags: asterisk-config-deploy
 
+- name: Ensure Git LFS is installed
+  shell:
+    cat ~/.gitconfig | grep -q 'git-lfs'
+    && echo -n 'INSTALLED'
+    || git lfs install
+  register: git_lfs_result
+  changed_when: git_lfs_result.stdout != 'INSTALLED'
+  tags: asterisk-config-deploy
+
 # This task runs 'become: no' so that the users SSH keys can be used to connect to the git repo
 - name: Git checkout from git repo
   git:

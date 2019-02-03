@@ -30,6 +30,20 @@
     force: yes
   with_items: "{{ find_override.files }}"
   notify: asterisk reload
-  
+
+- name: asterisk symlink sounds directory
+  file:
+    src: "{{ asterisk_config_deploy_sounds_dir }}"
+    dest: "{{ asterisk_config_deploy_sounds_path }}"
+    state: link
+    force: yes
+
+- name: asterisk symlink repo moh directory
+  file:
+    src: "{{ asterisk_config_deploy_moh_dir }}"
+    dest: "{{ asterisk_config_deploy_moh_path }}"
+    state: link
+    force: yes
+
 - name: asterisk reload
   service: name=asterisk state=restarted

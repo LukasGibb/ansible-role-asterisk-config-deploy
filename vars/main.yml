@@ -1,2 +1,7 @@
 ---
 # vars file for ansible-role-asterisk-config-deploy
+
+# Concatenate variables to shorten them and make other code more readable (keeping under 120 chars per line)
+asterisk_config_deploy_repo: "{{ asterisk_config_deploy_repo_protocol }}{{ asterisk_config_deploy_repo_url }}"
+asterisk_config_deploy_base_path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_ast_dir }}"
+asterisk_config_deploy_or_path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_ast_override_dir }}"
