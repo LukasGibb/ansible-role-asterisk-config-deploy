@@ -33,12 +33,12 @@
 
 - name: asterisk check repo sounds directory
   stat:
-    path: "{{ asterisk_config_deploy_sounds_dir }}"
+    path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_sounds_dir }}"
   register: sounds_dir
 
 - name: asterisk symlink repo sounds directory
   file:
-    src: "{{ asterisk_config_deploy_sounds_dir }}"
+    src: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_sounds_dir }}"
     dest: "{{ asterisk_config_deploy_sounds_path }}"
     state: link
     force: yes
@@ -46,12 +46,12 @@
 
 - name: asterisk check repo moh directory
   stat:
-    path: "{{ asterisk_config_deploy_moh_dir }}"
+    path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_moh_dir }}"
   register: moh_dir
 
 - name: asterisk symlink repo moh directory
   file:
-    src: "{{ asterisk_config_deploy_moh_dir }}"
+    src: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_moh_dir }}"
     dest: "{{ asterisk_config_deploy_moh_path }}"
     state: link
     force: yes
