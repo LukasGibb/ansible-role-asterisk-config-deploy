@@ -31,12 +31,23 @@
   with_items: "{{ find_override.files }}"
   notify: asterisk reload
 
-- name: asterisk symlink sounds directory
+- name: asterisk check repo sounds directory
+  stat:
+    path: "{{ asterisk_config_deploy_sounds_dir }}"
+  register: sounds_dir
+
+- name: asterisk symlink repo sounds directory
   file:
     src: "{{ asterisk_config_deploy_sounds_dir }}"
     dest: "{{ asterisk_config_deploy_sounds_path }}"
     state: link
     force: yes
+  when: sounds_dir.stat.isdir is defined and sounds_dir.stat.isdir
+
+- name: asterisk check repo moh directory
+  stat:
+    path: "{{ asterisk_config_deploy_moh_dir }}"
+  register: moh_dir
 
 - name: asterisk symlink repo moh directory
   file:
@@ -44,6 +55,7 @@
     dest: "{{ asterisk_config_deploy_moh_path }}"
     state: link
     force: yes
+  when: moh_dir.stat.isdir is defined and moh_dir.stat.isdir
 
 - name: asterisk reload
   service: name=asterisk state=restarted

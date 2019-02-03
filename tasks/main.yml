@@ -42,5 +42,9 @@
   - asterisk symlink repo base files
   - asterisk find repo override files
   - asterisk symlink repo override files
+  - asterisk check repo sounds directory
+  - asterisk symlink repo sounds directory
+  - asterisk check repo moh directory
+  - asterisk symlink repo moh directory
   - asterisk reload
   tags: asterisk-config-deploy
