@@ -18,7 +18,7 @@ asterisk_config_deploy_path: "/etc/asterisk-config-deploy/"
 ###############################################################################
 
 # The repo directory that contains your base asterisk config files
-asterisk_config_deploy_ast_dir: "asterisk"
+asterisk_config_deploy_ast_dir: "asterisk/"
 
 # The repo directory that contains more specific asterisk config files
 # These files will be symlinked after the files in 'asterisk_config_deploy_ast_dir'
