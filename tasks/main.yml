@@ -21,10 +21,6 @@
     mode: 0777
   tags: asterisk-config-deploy
 
-- name: Ensure user has a .gitconfig file
-  file:
-    
-
 - name: Ensure Git LFS is installed
   shell: >
     cat ~/.gitconfig | grep -q 'git-lfs'
