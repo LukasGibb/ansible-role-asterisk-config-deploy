@@ -21,16 +21,18 @@
     mode: 0777
   tags: asterisk-config-deploy
 
+# This task runs 'become: no' to install for the relevant user instead of root
 - name: Ensure Git LFS is installed
   shell: >
     cat ~/.gitconfig | grep -q 'git-lfs'
     && echo -n 'INSTALLED'
     || git lfs install
+  become: no
   register: git_lfs_result
   changed_when: git_lfs_result.stdout != 'INSTALLED'
   tags: asterisk-config-deploy
 
-# This task runs 'become: no' so that the users SSH keys can be used to connect to the git repo
+# This task runs 'become: no' so that the user's SSH keys can be used to connect to the git repo
 - name: Git checkout from git repo
   git:
     repo: "{{ asterisk_config_deploy_repo }}"
