@@ -51,6 +51,9 @@ can utilise your SSH keys without you having to leave your SSH keys on the aster
 
 https://developer.github.com/v3/guides/using-ssh-agent-forwarding/
 
+If you have multiple users applying this role then ensure you add them all to a group and pass the group name to the
+role using the asterisk_config_deploy_group variable.
+
 Role Variables
 --------------
 

@@ -33,3 +33,12 @@
 
 - name: asterisk reload
   service: name=asterisk state=reloaded
+
+- name: git set group permissions
+  file:
+    path: "{{ asterisk_config_deploy_path }}"
+    state: directory
+    recurse: yes
+    group: "{{ asterisk_config_deploy_group }}"
+    mode: g+swX
+  when: asterisk_config_deploy_group != ''

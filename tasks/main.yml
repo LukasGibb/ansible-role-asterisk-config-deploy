@@ -13,15 +13,18 @@
   until: my_result is succeeded
   tags: asterisk-config-deploy
 
-# Permissions set to 0777 so that they can be accessed by the user running git
+# Runs as current user, not root
+# Set permissions so current user and group can write
+# Other users can only read the files (ie. asterisk user)
 - name: Create directory for asterisk config files
   file:
     path: "{{ asterisk_config_deploy_path }}"
     state: directory
-    mode: 0777
+    mode: u+rwx,g+rwx,o=rx
+  become: no
   tags: asterisk-config-deploy
 
-# This task runs 'become: no' to install for the relevant user instead of root
+# This task runs 'become: no' to install for the current user instead of root
 - name: Ensure Git LFS is installed
   shell: >
     cat ~/.gitconfig | grep -q 'git-lfs'
@@ -32,7 +35,7 @@
   changed_when: git_lfs_result.stdout != 'INSTALLED'
   tags: asterisk-config-deploy
   
-# This task runs 'become: no' so that the user's SSH keys can be used to connect to the git repo
+# This task runs 'become: no' so that the current user's SSH key is used to connect to the git repo
 - name: Git checkout from git repo
   git:
     repo: "{{ asterisk_config_deploy_repo }}"
@@ -47,6 +50,20 @@
   - asterisk reload
   tags: asterisk-config-deploy
   
+- name: Reinitialize git repo with access for group
+  shell: >
+    cat .git/config | grep -q 'sharedrepository = 1'
+    && echo -n 'SHARED'
+    || git init --shared=group
+  args:
+    chdir: "{{ asterisk_config_deploy_path }}"
+  become: no
+  register: git_shared_result
+  changed_when: git_shared_result.stdout != 'SHARED'
+  when: asterisk_config_deploy_group != ''
+  notify: git set group permissions
+  tags: asterisk-config-deploy
+
 - name: Check repo sounds directory
   stat:
     path: "{{ asterisk_config_deploy_path }}{{ asterisk_config_deploy_sounds_dir }}"

@@ -13,6 +13,12 @@ asterisk_config_deploy_repo_url: "github.com/myusername/myasteriskconfig"
 # The directory where the git files will be checked out to
 asterisk_config_deploy_path: "/etc/asterisk-config-deploy/"
 
+# If multiple users are deploying the role, add them to the group you define here.
+# If a group is defined then special permissions are applied and the git repo will 
+# be re-initialised with the --shared=group option allowing multiple users to pull 
+# the repo to the same folder.
+#asterisk_config_deploy_group: ""
+
 ###############################################################################
 # Asterisk Config Details
 ###############################################################################

@@ -5,6 +5,7 @@
     asterisk_config_deploy_repo_url: "github.com/LukasGibb/test-asterisk-config"
     asterisk_config_deploy_repo_subfolder: "TestSubfolder/"
     asterisk_config_deploy_repo_override_subfolder: "TestSubfolder/TestOverrideSubfolder/"
+    asterisk_config_deploy_group: "adm"
 
   roles:
     - LukasGibb.asterisk
