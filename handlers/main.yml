@@ -4,7 +4,7 @@
 - name: asterisk find repo base files
   find:
     paths: "{{ asterisk_config_deploy_base_path }}"
-    patterns: "*.conf,*.ael,*.adsi,*.lua"
+    patterns: "*.conf,*.ael,*.adsi,*.lua,*.sh"
   register: find_base
 
 - name: asterisk symlink repo base files
@@ -19,7 +19,7 @@
 - name: asterisk find repo override files
   find:
     paths: "{{ asterisk_config_deploy_or_path }}"
-    patterns: "*.conf,*.ael,*.adsi,*.lua"
+    patterns: "*.conf,*.ael,*.adsi,*.lua,*.sh"
   register: find_override
 
 - name: asterisk symlink repo override files
